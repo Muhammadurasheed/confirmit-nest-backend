@@ -43,17 +43,19 @@ async function bootstrap() {
   app.use(helmet());
   app.use(compression());
 
-  // ✅ CORS setup
+  // ✅ CORS setup - Production & Development
   app.enableCors({
     origin: [
       'http://localhost:8080',
       'http://localhost:8081',
       'http://localhost:5173',
+      'https://confirmitx.vercel.app',
+      'https://confirmit-nest-backend.vercel.app',
       ...(process.env.CORS_ORIGIN?.split(',') || []),
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Api-Key'],
   });
 
   // ✅ API prefix
