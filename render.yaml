@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: confirmit-backend
+    env: node
+    plan: free
+    buildCommand: |
+      yarn install --production
+      yarn build
+      yarn cache clean
+    startCommand: |
+      node --max-old-space-size=256 dist/main.js
+    envVars:
+      - key: NODE_ENV
+        value: production
